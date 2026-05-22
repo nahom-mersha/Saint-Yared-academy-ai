@@ -1,0 +1,33 @@
+.send_button{
+    letter-spacing: 5px;
+    border-radius: 10px;
+    margin: 10px;
+    color: green;
+    font-size: large;
+    border-width: 1px; 
+    box-shadow: 0 0 10px blue;
+    transition: all 0.5s;
+}
+.send_button:hover{
+    background-color: green;
+    color: black;
+    box-shadow: 0 0 10px red;
+    font-size: 20px
+}
+.send_button:active{
+    font-size: 15px;
+    background-color: greenyellow;
+}
+.send_button_icon{
+    font-size: 15px;
+    color: green;
+    margin-right: 10px;
+    transition: all 0.5s;
+}
+.send_button:hover .send_button_icon{
+    color: black;
+    font-size: 20px;
+}
+.send_button:active .send_button_icon{
+    font-size: 15px
+}
