@@ -21,7 +21,7 @@ export function MainChatApp(){
             headers: {
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify({messege: newMessage})
+            body: JSON.stringify({message: newMessage})
         })
 
         const data = await response.json()
