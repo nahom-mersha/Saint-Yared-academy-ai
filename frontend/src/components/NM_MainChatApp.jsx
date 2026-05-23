@@ -12,9 +12,23 @@ export function MainChatApp(){
     const currentText = stateData[0]
     const changeText = stateData[1]
 
-    function addMessage(newMessage){
+    async function addMessage(newMessage){
         chatArrayUpdater([...chatArray, newMessage])
         changeText("")
+
+        const response = await fetch("http://127.0.0.1:5000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({messege: newMessage})
+        })
+
+        const data = await response.json()
+        const botmessage = data["reply"]
+        chatArrayUpdater([...chatArray, botmessage])
+
+
     }
 
     return(
