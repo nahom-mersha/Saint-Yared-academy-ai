@@ -1,6 +1,10 @@
 import json
 
-def checkmsg(msg):
+def checkmsg(data):
+    msg = data["message"]
+    botReplay = "unknown"
+    updatedIntent = ""
+    updatedFallbackCount = 0
     words = msg.lower()
     words = words.split()
     
@@ -11,5 +15,7 @@ def checkmsg(msg):
         for key in data:
             for keyword in data[key]:
                 if word == keyword:
-                    return key
-    return "unknown"
+                    botReplay = key
+
+
+    return [botReplay, updatedIntent, updatedFallbackCount]

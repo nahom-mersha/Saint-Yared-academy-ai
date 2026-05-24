@@ -15,12 +15,18 @@ def home():
 @app.route("/chat", methods=["POST"])
 def bot_response():
     data = request.get_json()
-    user_msg = data["message"]
+
     print(data["old_data"])
+     
+    update = searcher.checkmsg(data)
+    botResponse = update[0]
+    newIntent = update[1]
+    newFallbackCount = update[2]
 
-    bot_response = searcher.checkmsg(user_msg)
-
-    return jsonify({"reply" : f"The bot's answer is: {bot_response}"})
+    return jsonify({"reply" : f"The bot's answer is: {botResponse}",
+                    "newIntent" : newIntent,
+                    "newFallbackCount" : newFallbackCount
+                    })
 
 if __name__ == "__main__":
     app.run(debug=True)

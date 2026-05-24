@@ -12,6 +12,14 @@ export function MainChatApp(){
     const currentText = stateData[0]
     const changeText = stateData[1]
 
+    const stateForIntent = useState("start")
+    const intent = stateForIntent[0]
+    const setIntent = stateForIntent[1]
+
+    const stateForFallbackCount = useState(0)
+    const fallbackCount = stateForFallbackCount[0]
+    const setFallbackCount = stateForFallbackCount[1]
+
     async function addMessage(newMessage){
         
         const old_data = chatArray
@@ -20,7 +28,7 @@ export function MainChatApp(){
             return([...prev, 
                 {
                     role: "user",
-                    message: newMessage
+                    message: newMessage,
                 }])
         }
         chatArrayUpdater(addusers)
@@ -34,11 +42,20 @@ export function MainChatApp(){
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({message: newMessage,
+                                    intent: intent,
+                                    fallbackCount: fallbackCount,
                                     old_data: old_data})
             })
             
             const data = await response.json()
             const botmessage = data["reply"]
+            const newIntent = data["newIntent"]
+            const newFallbackCount = data["newFallbackCount"]
+
+            setIntent(newIntent)
+            setFallbackCount(newFallbackCount)
+
+
             
             function addbots(prev){
                 return([...prev,
