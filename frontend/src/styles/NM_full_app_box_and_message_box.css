@@ -1,0 +1,10 @@
+.messagesBoxCSS{
+    background-color: rgb(161, 161, 234);
+    flex: 1;
+    overflow-y: auto;
+}
+.FullAppBox{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChatMessagesRenderer } from "./NM_ChatMessagesRenderer";
 import InputBar from "./NM_input_bar";
-
+import "../styles/NM_full_app_box_and_message_box.css"
 
 export function MainChatApp(){
     const manager = useState([])
@@ -24,16 +24,6 @@ export function MainChatApp(){
         
         const old_data = chatArray
 
-        function addusers(prev){
-            return([...prev, 
-                {
-                    role: "user",
-                    message: newMessage,
-                }])
-        }
-        chatArrayUpdater(addusers)
-
-        changeText("")
         
         try {
             const response = await fetch("http://127.0.0.1:5000/chat", {
@@ -42,46 +32,51 @@ export function MainChatApp(){
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({message: newMessage,
-                                    intent: intent,
-                                    fallbackCount: fallbackCount,
-                                    old_data: old_data})
-            })
-            
+                    intent: intent,
+                    fallbackCount: fallbackCount,
+                    old_data: old_data})
+                })
+                
             const data = await response.json()
-            const botmessage = data["reply"]
-            const newIntent = data["newIntent"]
-            const newFallbackCount = data["newFallbackCount"]
-
+            
+            const newIntent = data["bot"]["intent"]
+            const newFallbackCount = data["bot"]["fallbackCount"]
             setIntent(newIntent)
             setFallbackCount(newFallbackCount)
-
-
+                                
+            function addMessages(prev){
+                return([...prev, data["user"], data["bot"]])
+            }
+            chatArrayUpdater(addMessages)    
+            changeText("")
             
-            function addbots(prev){
-                return([...prev,
-                    {
-                        role: "bot",
-                        message: botmessage
-
-                    }])
+           
+            } catch(error) {
+                console.log("NAHOM" , error)
             }
             
-            chatArrayUpdater(addbots)
-        } catch(error) {
-            console.log("NAHOM" , error)
-        }
     }
+        const messagesBox = useRef(null)
+        useEffect(()=>{
+            const messagesBoxElement = messagesBox.current;
+            if (messagesBoxElement){
+                messagesBoxElement.scrollTop = messagesBoxElement.scrollHeight;
+            }
+        }, [chatArray])
 
-    return(
-        <>
-            <ChatMessagesRenderer messages ={chatArray}>
-            </ChatMessagesRenderer>
+    
+            return(
+            <div className="FullAppBox">
+                <div className="messagesBoxCSS" ref={messagesBox}>
+                    <ChatMessagesRenderer messages ={chatArray}>
+                    </ChatMessagesRenderer>
+                </div>
 
-            <InputBar 
-                messageAdder={addMessage} 
-                currentText={currentText}
-                changeText={changeText}>
-            </InputBar>
-        </>
+                <InputBar 
+                    messageAdder={addMessage} 
+                    currentText={currentText}
+                    changeText={changeText}>
+                </InputBar>
+            </div>
     );
 }
