@@ -1,9 +1,10 @@
+import "../styles/chatText.css"
 export function ChatMessagesRenderer(props){
     const messages  = props.messages
     function mappingFunct(msg, i){
-        return (<p key={i}>
-            {msg["role"]} --- {msg["message"]}
-        </p>);
+        return (<div key={i} className={msg["role"] === "User" ? "userText" : "botText"}>
+            {msg["role"] === "Bot" ? `${msg["role"]} --- ${msg["message"]}` : `${msg["message"]} --- ${msg["role"]}`}
+        </div>);
     }
     return(
         <>

@@ -71,7 +71,6 @@ export function MainChatApp(){
                     <ChatMessagesRenderer messages ={chatArray}>
                     </ChatMessagesRenderer>
                 </div>
-
                 <InputBar 
                     messageAdder={addMessage} 
                     currentText={currentText}

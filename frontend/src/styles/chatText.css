@@ -1,0 +1,14 @@
+.userText{
+    background-color: aqua;
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+    padding: 5px;
+    font-size: large;
+}
+.botText{
+    background-color: brown;
+    margin-left: 10px;
+    font-size: large;
+    padding: 5px;
+}
