@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, session
 import NM_keyword_searcher as searcher
 from flask_cors import CORS
 from datetime import datetime
+import json
 
 
 
@@ -37,6 +38,14 @@ def bot_response():
         "fallbackCount" : newFallbackCount,
         "timestamp" : datetime.now().isoformat()
     }
+
+    # print(data["old_data"])
+    # data["old_data"].append(list(response))
+    # new_history = data["old_data"]
+    # print(data["old_data"])
+    # with open("NM_chat_history.json", 'w') as history:
+    #     json.dump(new_history, history, indent=4)
+
 
     return jsonify(response)
 

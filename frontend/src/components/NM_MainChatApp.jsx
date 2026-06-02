@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChatMessagesRenderer } from "./NM_ChatMessagesRenderer";
 import InputBar from "./NM_input_bar";
 import "../styles/NM_full_app_box_and_message_box.css"
+import Export_button from "./NM_export_button.jsx"
 
 export function MainChatApp(){
     const manager = useState([])
@@ -52,7 +53,7 @@ export function MainChatApp(){
             
            
             } catch(error) {
-                console.log("NAHOM" , error)
+                console.log("Error caught is:" , error)
             }
             
     }
@@ -67,6 +68,7 @@ export function MainChatApp(){
     
             return(
             <div className="FullAppBox">
+                <Export_button></Export_button>
                 <div className="messagesBoxCSS" ref={messagesBox}>
                     <ChatMessagesRenderer messages ={chatArray}>
                     </ChatMessagesRenderer>
