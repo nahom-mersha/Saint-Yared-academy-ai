@@ -1,8 +1,9 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, Response
 import NM_keyword_searcher as searcher
 from flask_cors import CORS
 from datetime import datetime
 import json
+
 
 
 
@@ -40,14 +41,35 @@ def bot_response():
     }
 
     # print(data["old_data"])
-    # data["old_data"].append(list(response))
-    # new_history = data["old_data"]
+    data["old_data"].append(list(response))
+    new_history = data["old_data"]
     # print(data["old_data"])
-    # with open("NM_chat_history.json", 'w') as history:
-    #     json.dump(new_history, history, indent=4)
+    with open("NM_chat_history.json", 'w') as history:
+        json.dump(new_history, history, indent=4)
 
 
     return jsonify(response)
+
+@app.route("/export", methods=["GET"])
+def export_history():
+    
+    try:
+        with open("NM_chat_history.json", 'r') as history:
+            history_obj = json.load(history)
+    except:
+        history_obj = []
+
+        
+    body = json.dumps(history_obj, indent=2)
+
+    return Response(
+        body,
+        mimetype="application/json",
+        headers={
+            "Content-Disposition": "attachment; filename=history_of_chat.json"
+        }
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
