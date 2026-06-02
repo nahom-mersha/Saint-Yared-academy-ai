@@ -4,3 +4,5 @@ __pycache__/
 
 .vscode/*
 !.vscode/settings.json
+
+NM_chat_history.json
