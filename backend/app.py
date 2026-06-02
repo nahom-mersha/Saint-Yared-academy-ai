@@ -40,10 +40,9 @@ def bot_response():
         "timestamp" : datetime.now().isoformat()
     }
 
-    # print(data["old_data"])
-    data["old_data"].append(list(response))
+    for value in response.values():
+        data["old_data"].append(value)
     new_history = data["old_data"]
-    # print(data["old_data"])
     with open("NM_chat_history.json", 'w') as history:
         json.dump(new_history, history, indent=4)
 
