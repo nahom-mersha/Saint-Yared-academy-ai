@@ -2,7 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { ChatMessagesRenderer } from "./NM_ChatMessagesRenderer";
 import InputBar from "./NM_input_bar";
 import "../styles/NM_full_app_box_and_message_box.css"
+import "../styles/NM_top_header.css"
 import Export_button from "./NM_export_button.jsx"
+import Reset_button from "./NM_reset_button.jsx";
 
 export function MainChatApp(){
     const manager = useState([])
@@ -68,7 +70,10 @@ export function MainChatApp(){
     
             return(
             <div className="FullAppBox">
-                <Export_button></Export_button>
+                <div className="top_header">
+                    <Export_button></Export_button>
+                    <Reset_button chatArrayUpdater={chatArrayUpdater}></Reset_button>
+                </div>
                 <div className="messagesBoxCSS" ref={messagesBox}>
                     <ChatMessagesRenderer messages ={chatArray}>
                     </ChatMessagesRenderer>

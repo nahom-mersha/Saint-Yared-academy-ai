@@ -68,7 +68,11 @@ def export_history():
             "Content-Disposition": "attachment; filename=history_of_chat.json"
         }
     )
-
+@app.route("/reset", methods=["POST"])
+def reset_history():
+    with open("NM_chat_history.json", 'w') as history:
+        json.dump([], history, indent=4)
+    return "history was also reseted"
 
 if __name__ == "__main__":
     app.run(debug=True)
