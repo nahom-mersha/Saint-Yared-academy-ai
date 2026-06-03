@@ -1,0 +1,7 @@
+.timestamp{
+    background-color:  rgb(95, 95, 95, 0.5);
+    font-size: smaller;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

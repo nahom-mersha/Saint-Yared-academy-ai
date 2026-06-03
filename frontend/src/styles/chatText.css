@@ -1,13 +1,12 @@
 .userText{
     background-color: aqua;
-    display: flex;
-    justify-content: end;
     margin-right: 10px;
     padding: 5px;
     font-size: large;
+    text-align: right;
 }
 .botText{
-    background-color: brown;
+    background-color: rgb(183, 141, 4);
     margin-left: 10px;
     font-size: large;
     padding: 5px;
