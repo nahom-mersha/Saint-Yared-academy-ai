@@ -1,9 +1,39 @@
 {
+            "greet_and_ask_name" : [
+                "CONTINUE"
+            ],
+            "list_options" : [ 
+                {"for_about_website" : [
+                                    "about", 
+                                    "info",
+                                    "information",
+                                    "tell me",
+                                    "Explain"
+                            ]},
+                {"for_link" : [
+                                    "link",
+                                    "website",
+                                    "webpage"
+                            ]},
+                {"for_contact_list" : [
+                                    "contact",
+                                    "phone",
+                                    "number",
+                                    "email",
+                                    "gmail"
+                            ]}
 
+            ],
+            
+            "ask_to_show_Founding_members" : ["yes", 
+                                    "ok", 
+                                    "ya,", 
+                                    "for sure"
+                                ],
+            
+            "ask_satisfaction" : ["CONTINUE"],
 
-    "greeting" : ["hi", "hello", "hey", "heyyyy"],
-    "About": ["academy", "about", "try"]
-
+            "end" : [""]
 
 
 }
