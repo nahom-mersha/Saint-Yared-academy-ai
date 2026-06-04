@@ -24,7 +24,7 @@ def bot_response():
         "message" : data["message"],
         "intent" : data["intent"],
         "fallbackCount" : data["fallbackCount"],
-        "timestamp" : datetime.now().strftime("%I:%M %p")
+        "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
      
     update = searcher.checkmsg(data)
@@ -37,7 +37,7 @@ def bot_response():
         "message" : botResponse,
         "intent" : newIntent,
         "fallbackCount" : newFallbackCount,
-        "timestamp" : datetime.now().strftime("%I:%M %p")
+        "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
 
     for value in response.values():

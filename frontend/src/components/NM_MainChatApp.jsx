@@ -83,8 +83,15 @@ export function MainChatApp(){
             return(
             <div className="FullAppBox">
                 <div className="top_header">
+
                     <Export_button></Export_button>
-                    <Reset_button chatArrayUpdater={chatArrayUpdater}></Reset_button>
+
+                    <Reset_button chatArrayUpdater={chatArrayUpdater} 
+                                    changeText={changeText} 
+                                    setFallbackCount={setFallbackCount} 
+                                    setIntent={setIntent}>
+                    </Reset_button>
+                    
                 </div>
                 <div className="messagesBoxCSS" ref={messagesBox}>
                     <ChatMessagesRenderer messages ={chatArray}>

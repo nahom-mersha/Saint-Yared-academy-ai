@@ -9,7 +9,7 @@
                     "for_contact_list" : "The academy's contact phone number is +49 178 168 8351 and email is office@yared-academy.org."
                 },
             
-            "ask_to_show_Founding_members" : " Now i can show you founding members. Do you want me to do that? yes or no please.",
+            "ask_to_show_Founding_members" : " Now i can show you founding members. Do you want me to do that? I only take yes for an answer :D",
             
             "ask_satisfaction" : "The founding members are: Prof. Dr. Mersha Mengistie Chairman, Prince Dr. Asfa-Wossen Asserate Founding Members, Zemelak Demissie Vice-Chairman and Taddesse Seifu Secretary. Thank you for using this bot, are you satisfied? Please give any feedback to the developer.",
 
@@ -17,6 +17,6 @@
 
             "soft_fallback" : "Please can you rephrase your response?",
 
-            "hard_fallback_end" : "Opps, something went wrong. Please restart the chat"
+            "hard_fallback_end" : "Opps, something went wrong. Please restart/reset the chat"
 
 }

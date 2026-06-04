@@ -72,7 +72,7 @@ def checkmsg(msg):
             if 0 < fb_count <= 2 and terminate == False:
                 reply = q_data["soft_fallback"]
             else:
-                reply = q_data["hard_fallback_end"] + str(fb_count)
+                reply = q_data["hard_fallback_end"]
         
         else:
             if current_state == "list_options":
