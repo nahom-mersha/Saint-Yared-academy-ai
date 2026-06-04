@@ -7,7 +7,19 @@ import Export_button from "./NM_export_button.jsx"
 import Reset_button from "./NM_reset_button.jsx";
 // Sorry by "intent" I meant state
 export function MainChatApp(){
-    const manager = useState([])
+    
+    const initial_text = {}
+    const time = new Date();
+    const now = time.toLocaleTimeString();
+    initial_text["bot"] = {
+        "role" : "Bot",
+        "message" : "Hi Please tell me your name!",
+        "intent" : "greet_and_ask_name",
+        "fallbackCount" : 0,
+        "timestamp" : now
+    }
+
+    const manager = useState([initial_text["bot"]])
     const chatArray = manager[0]
     const chatArrayUpdater = manager[1]
 
