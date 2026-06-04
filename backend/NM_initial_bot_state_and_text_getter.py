@@ -1,0 +1,20 @@
+import json
+from datetime import datetime
+
+def get_initial_state():
+    INITIAL_STATE = "greet_and_ask_name"
+    return INITIAL_STATE
+
+def get_initial_text():
+    initial_bot_text =  {}
+    initial_state = get_initial_state()
+    with open("NM_bot_questions.json", 'r') as f:
+        q_data = json.load(f)
+        initial_bot_text = {
+                "role" : "Bot",
+                "message" : q_data[initial_state],
+                "intent" : initial_state,
+                "fallbackCount" : 0,
+                "timestamp" : datetime.now().strftime("%I:%M:%S %p")
+            }
+    return initial_bot_text

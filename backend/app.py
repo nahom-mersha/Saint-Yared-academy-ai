@@ -3,6 +3,8 @@ import NM_keyword_searcher as searcher
 from flask_cors import CORS
 from datetime import datetime
 import json
+import NM_initial_bot_state_and_text_getter as get_initial_state_or_text_module
+
 
 # Sorry by "intent" I meant state
 
@@ -39,7 +41,8 @@ def bot_response():
         "fallbackCount" : newFallbackCount,
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
-
+    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
+    data["old_data"].append(initial_bot_text)
     for value in response.values():
         data["old_data"].append(value)
     new_history = data["old_data"]
@@ -69,20 +72,13 @@ def export_history():
         }
     )
 @app.route("/reset", methods=["POST"])
+
 def reset_history():
-    initial_bot_text =  {}
-    with open("NM_bot_questions.json", 'r') as f:
-        q_data = json.load(f)
-        initial_bot_text["bot"] = {
-                "role" : "Bot",
-                "message" : q_data["greet_and_ask_name"],
-                "intent" : "greet_and_ask_name",
-                "fallbackCount" : 0,
-                "timestamp" : datetime.now().strftime("%I:%M:%S %p")
-            }
+
+    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
 
     with open("NM_chat_history.json", 'w') as history:
-        json.dump([initial_bot_text["bot"]], history, indent=4)
+        json.dump([initial_bot_text], history, indent=4)
     return "history was also reseted"
 
 if __name__ == "__main__":
