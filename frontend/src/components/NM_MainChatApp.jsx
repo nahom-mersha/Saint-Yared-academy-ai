@@ -8,6 +8,7 @@ import Reset_button from "./NM_reset_button.jsx";
 // Sorry by "intent" I meant state
 export function MainChatApp(){
     
+    //YOU SHOULD MAKE AN INPOINT FOR THIS INITIAL TEXT TO GET IT FROM THE BACKEND
     const initial_text = {}
     const time = new Date();
     const now = time.toLocaleTimeString();
@@ -91,7 +92,7 @@ export function MainChatApp(){
                                     setFallbackCount={setFallbackCount} 
                                     setIntent={setIntent}>
                     </Reset_button>
-                    
+
                 </div>
                 <div className="messagesBoxCSS" ref={messagesBox}>
                     <ChatMessagesRenderer messages ={chatArray}>
