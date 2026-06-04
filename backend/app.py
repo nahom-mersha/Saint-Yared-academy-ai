@@ -4,7 +4,7 @@ from flask_cors import CORS
 from datetime import datetime
 import json
 
-
+# Sorry by "intent" I meant state
 
 
 app = Flask(__name__)

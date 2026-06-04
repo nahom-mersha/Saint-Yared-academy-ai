@@ -33,7 +33,11 @@
             
             "ask_satisfaction" : ["CONTINUE"],
 
-            "end" : [""]
+            "end" : [""],
+
+            "soft_fallback" : ["CONTINUE"],
+
+            "hard_fallback_end" : [""]
 
 
 }

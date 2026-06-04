@@ -1,10 +1,14 @@
 import json
-def checkmsg(msg, currentState):
+def checkmsg(msg):
+    bot_replay = "Default Message"
+    newFallbackCount = 0
+    currentState = msg["intent"] # Sorry my intent i meant state
     words = msg["message"]
-    newState = "unknown"
+    newState = "fall_back"
     more_info = ["", ""] # Index 0 is for crafting the next message if neccessary
     words = words.lower()
     words = words.split()
+    words = ["@"] # This is just to prevent no checking if the user enters an empty string
     
 
     with open("NM_keywords_dictionary.json", 'r') as f:
@@ -19,6 +23,14 @@ def checkmsg(msg, currentState):
                 mark = 1
         return state # This is just incase there will be a bug that continues the convo after ending it
 
+    def handle_fallback(msg):
+        current_count = msg["fallbackCount"]
+        if current_count == 2:
+            return 3, "hard_fallback_end"
+        else:
+            current_count += 1
+            return current_count, "soft_fallback"
+    
     for word in words:
         if currentState == "greet_and_ask_name":
             more_info[0] = msg["message"]
@@ -38,15 +50,24 @@ def checkmsg(msg, currentState):
             elif decision == "for_contact_list":
                 more_info[0] = "for_contact_list"
                 newState = "ask_to_show_Founding_members"
-        if currentState == "end":
+        if currentState == "end" or currentState =="hard_fallback_end":
             newState = "end"
             more_info[0] = "chat_ended"
+        if newState == "fall_back":
+            newFallbackCount, newState = handle_fallback(msg)
         else:    
             for keyword in data[currentState]:
                 if word == keyword or keyword == "CONTINUE":
                     newState = get_next_state(currentState) # You will need to implement a function to get the next state
 
-    return [newState, more_info]
+
+    
+    
+
+    
+    bot_replay = [bot_replay, newState, newFallbackCount]
+
+    return [bot_replay, newState, newFallbackCount]
 
 # Next round add the logic of the additional info to the caller. like the name of the user etc
 #Try runs just for fun! Delete this afterwards!!

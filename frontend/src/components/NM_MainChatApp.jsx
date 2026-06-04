@@ -5,7 +5,7 @@ import "../styles/NM_full_app_box_and_message_box.css"
 import "../styles/NM_top_header.css"
 import Export_button from "./NM_export_button.jsx"
 import Reset_button from "./NM_reset_button.jsx";
-
+// Sorry by "intent" I meant state
 export function MainChatApp(){
     const manager = useState([])
     const chatArray = manager[0]
@@ -15,7 +15,7 @@ export function MainChatApp(){
     const currentText = stateData[0]
     const changeText = stateData[1]
 
-    const stateForIntent = useState("start")
+    const stateForIntent = useState("greet_and_ask_name")
     const intent = stateForIntent[0]
     const setIntent = stateForIntent[1]
 
