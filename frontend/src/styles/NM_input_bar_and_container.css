@@ -1,18 +1,22 @@
-.input_bar{
-    border-radius: 10px;
-    background-color: lightgrey;
-    border-width: 1px;
-    font-size: medium;
-    padding: 5px;
-    white-space: normal;
-    overflow-wrap: break-word;
-    width: 200px;
+
+
+.input_bar {
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  background: #eee;
+  margin: 10px;
 }
+
 .input_bar_and_send{
     display: flex;
     justify-content: center;
     align-items: center;
     bottom: 0;
     width: 100%;
+    height: 50px;
+    background: #ddd;
+    padding-bottom: 5px;
+    padding-top: 5px;
 
 }

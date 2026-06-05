@@ -1,24 +1,41 @@
 body{
     margin: 0;
-}
-.messagesBoxCSS{
-    background-color: rgb(161, 161, 234);
-    flex: 1;
-    overflow-y: auto;
-    border: 1px solid grey;
-
-    border-radius: 20px;
-
-}
-.FullAppBox{
-    background-color: chartreuse;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.FullAppBox {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin: 25px 10px;
+  height: calc(100% - 50px);
+  border: var(--border);
+  border-radius: 5px;
+  background: var(--msger-bg);
+  box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
     height: 100vh;
-    width: 80%;
     margin: auto;
-    border: 3px solid black;
-    box-sizing: border-box;
-    border-radius: 20px;
+    min-width: 400px;
+}
+
+.messagesBoxCSS {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+.messagesBoxCSS::-webkit-scrollbar {
+  width: 6px;
+}
+.messagesBoxCSS::-webkit-scrollbar-track {
+  background: #ddd;
+}
+.messagesBoxCSS::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
 }
 

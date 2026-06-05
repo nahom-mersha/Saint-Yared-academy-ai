@@ -8,8 +8,8 @@ function SendButton(props){    // This component should be a child of the input 
     
     return (
         <div>
-            <button className="send_button" onClick={() => {messageAdder(currentText)}}>
-                <IoSend className="send_button_icon"> </IoSend>SEND
+            <button className="send_button_alone" onClick={() => {messageAdder(currentText)}}>
+                <IoSend className="send_button_icon"> </IoSend>
             </button>
         </div>
     );

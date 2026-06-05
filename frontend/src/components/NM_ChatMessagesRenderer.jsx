@@ -1,5 +1,6 @@
 import "../styles/chatText.css"
 import "../styles/timestamp.css"
+import SendButton from "./NM_send_button.jsx";
 
 export function ChatMessagesRenderer(props){
     const messages  = props.messages
@@ -7,12 +8,12 @@ export function ChatMessagesRenderer(props){
         return (<div key={i} className={msg["role"] === "User" ? "userText" : "botText"}>
                 {msg["role"] === "Bot" ? (
                 <>
-                    {msg["role"]} --- {msg["message"]}
+                    🤖 Bot --- {msg["message"]}
                     <div className="timestamp"> {msg["timestamp"]} </div> 
                 </>   )
                 : 
                 (<>
-                    {msg["message"]} --- {msg["role"]}
+                    {msg["message"]} --- 🧑 You
                     <div className="timestamp"> {msg["timestamp"]} </div> 
                 </>)}
             </div>

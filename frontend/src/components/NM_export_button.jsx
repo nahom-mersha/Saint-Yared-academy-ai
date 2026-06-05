@@ -7,7 +7,7 @@ function Export_button(){
     
     return(
         <div>
-            <button className="send_button" onClick={export_funct}>Export</button>
+            <button className="button" onClick={export_funct}>Export</button>
         </div>
     )
 }

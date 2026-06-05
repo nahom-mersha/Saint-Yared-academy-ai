@@ -30,7 +30,7 @@ function Reset_button(props){
 
     return(
         <div>
-            <button className="send_button" onClick={reset_funct}>Reset</button>
+            <button className="button" onClick={reset_funct}>Reset</button>
         </div>
     )
 }

@@ -1,13 +1,29 @@
-.userText{
-    background-color: aqua;
-    margin-right: 10px;
-    padding: 5px;
-    font-size: large;
-    text-align: right;
+
+
+.userText {
+  max-width: 450px;
+  padding: 15px;
+  border-radius: 15px;
+  background: var(--left-msg-bg);
+  text-align: right;
+  margin-left: auto;
+  max-width: 80%;
+  
 }
-.botText{
-    background-color: rgb(183, 141, 4);
-    margin-left: 10px;
-    font-size: large;
-    padding: 5px;
+.botText {
+    max-width: 450px;
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--left-msg-bg);
+    margin-right: auto;
+    max-width: 80%;
+}
+.userText,
+.botText {
+    max-width: 450px;
+    padding: 15px;
+    border-radius: 15px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
