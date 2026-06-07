@@ -101,7 +101,8 @@ export function MainChatApp(){
                 <InputBar 
                     messageAdder={addMessage} 
                     currentText={currentText}
-                    changeText={changeText}>
+                    changeText={changeText}
+>
                 </InputBar>
             </div>
     );
