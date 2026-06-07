@@ -4,13 +4,51 @@ from flask_cors import CORS
 from datetime import datetime
 import json
 import NM_initial_bot_state_and_text_getter as get_initial_state_or_text_module
-
+from flask_socketio import SocketIO, emit
 
 # Sorry by "intent" I meant state
 
 
 app = Flask(__name__)
-CORS(app)
+socketiO = SocketIO(app, cors_allowed_origins="*")
+
+
+@socketiO.on("user_text")
+def bot_response(data):
+    response = {}
+    response["user"] = {
+        "role" : "User",
+        "message" : data["message"],
+        "intent" : data["intent"],
+        "fallbackCount" : data["fallbackCount"],
+        "timestamp" : datetime.now().strftime("%I:%M:%S %p")
+    }
+     
+    update = searcher.checkmsg(data)
+    botResponse = update[0]
+    newIntent = update[1]
+    newFallbackCount = update[2]
+
+    response["bot"] = {
+        "role" : "Bot",
+        "message" : botResponse,
+        "intent" : newIntent,
+        "fallbackCount" : newFallbackCount,
+        "timestamp" : datetime.now().strftime("%I:%M:%S %p")
+    }
+    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
+    data["old_data"].append(initial_bot_text)
+    for value in response.values():
+        data["old_data"].append(value)
+    new_history = data["old_data"]
+    with open("NM_chat_history.json", 'w') as history:
+        json.dump(new_history, history, indent=4)
+
+
+    emit("bot_reply", response)
+
+
+
 
 
 @app.route("/")
@@ -72,7 +110,6 @@ def export_history():
         }
     )
 @app.route("/reset", methods=["POST"])
-
 def reset_history():
 
     initial_bot_text = get_initial_state_or_text_module.get_initial_text()
@@ -82,4 +119,4 @@ def reset_history():
     return "history was also reseted"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketiO.run(app, debug=True)

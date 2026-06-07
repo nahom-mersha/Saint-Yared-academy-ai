@@ -1,3 +1,4 @@
+import socketio from "./NM_flask_socket_io.jsx"
 import { useState, useRef, useEffect } from "react";
 import { ChatMessagesRenderer } from "./NM_ChatMessagesRenderer";
 import InputBar from "./NM_input_bar";
@@ -7,6 +8,36 @@ import Export_button from "./NM_export_button.jsx"
 import Reset_button from "./NM_reset_button.jsx";
 // Sorry by "intent" I meant state
 export function MainChatApp(){
+
+    useEffect(()=> {
+        const bot_reply_handler = (data) =>  {
+            const newIntent = data["bot"]["intent"]
+            const newFallbackCount = data["bot"]["fallbackCount"]
+            setIntent(newIntent)
+            setFallbackCount(newFallbackCount)
+                                
+            function addMessages(prev){
+                return([...prev, data["user"], data["bot"]])
+            }
+            chatArrayUpdater(addMessages)    
+            changeText("")
+        };
+        socketio.on("bot_reply", bot_reply_handler);
+        return () => {
+            socketio.off("bot_reply", bot_reply_handler)
+        };
+    }, []);
+    
+
+
+    function addMessage(newMessage){
+        const body = {message: newMessage,
+            intent: intent,
+            fallbackCount: fallbackCount,
+            old_data: old_data}
+
+        socketio.emit("user_text", body)       
+    }
     
     //YOU SHOULD MAKE AN ENDPOINT FOR THIS INITIAL TEXT TO GET IT FROM THE BACKEND
     const initial_text = {}
@@ -36,42 +67,44 @@ export function MainChatApp(){
     const fallbackCount = stateForFallbackCount[0]
     const setFallbackCount = stateForFallbackCount[1]
 
-    async function addMessage(newMessage){
+    const old_data = chatArray
+
+    // async function addMessage(newMessage){
         
-        const old_data = chatArray
+    //     const old_data = chatArray
 
         
-        try {
-            const response = await fetch("http://127.0.0.1:5000/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({message: newMessage,
-                    intent: intent,
-                    fallbackCount: fallbackCount,
-                    old_data: old_data})
-                })
+    //     try {
+    //         const response = await fetch("http://127.0.0.1:5000/chat", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type" : "application/json"
+    //             },
+    //             body: JSON.stringify({message: newMessage,
+    //                 intent: intent,
+    //                 fallbackCount: fallbackCount,
+    //                 old_data: old_data})
+    //             })
                 
-            const data = await response.json()
+    //         const data = await response.json()
             
-            const newIntent = data["bot"]["intent"]
-            const newFallbackCount = data["bot"]["fallbackCount"]
-            setIntent(newIntent)
-            setFallbackCount(newFallbackCount)
+    //         const newIntent = data["bot"]["intent"]
+    //         const newFallbackCount = data["bot"]["fallbackCount"]
+    //         setIntent(newIntent)
+    //         setFallbackCount(newFallbackCount)
                                 
-            function addMessages(prev){
-                return([...prev, data["user"], data["bot"]])
-            }
-            chatArrayUpdater(addMessages)    
-            changeText("")
+    //         function addMessages(prev){
+    //             return([...prev, data["user"], data["bot"]])
+    //         }
+    //         chatArrayUpdater(addMessages)    
+    //         changeText("")
             
            
-            } catch(error) {
-                console.log("Error caught is:" , error)
-            }
+    //         } catch(error) {
+    //             console.log("Error caught is:" , error)
+    //         }
             
-    }
+    // }
         const messagesBox = useRef(null)
         useEffect(()=>{
             const messagesBoxElement = messagesBox.current;
