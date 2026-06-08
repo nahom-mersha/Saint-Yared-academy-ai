@@ -8,11 +8,13 @@ from flask_socketio import SocketIO, emit
 
 # Sorry by "intent" I meant state
 
-
 app = Flask(__name__)
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+@app.route("/")
+def home():
+    return "This is just the home page"
 
 @socketio.on("user_text")
 def bot_response(data):
@@ -48,48 +50,16 @@ def bot_response(data):
 
     emit("bot_reply", response)
 
+@socketio.on("reset")
+def reset_history():
 
+    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
 
-
-
-@app.route("/")
-def home():
-    return "This is just the home page"
-
-# @app.route("/chat", methods=["POST"])
-# def bot_response():
-#     data = request.get_json()
-#     response = {}
-#     response["user"] = {
-#         "role" : "User",
-#         "message" : data["message"],
-#         "intent" : data["intent"],
-#         "fallbackCount" : data["fallbackCount"],
-#         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
-#     }
-     
-#     update = searcher.checkmsg(data)
-#     botResponse = update[0]
-#     newIntent = update[1]
-#     newFallbackCount = update[2]
-
-#     response["bot"] = {
-#         "role" : "Bot",
-#         "message" : botResponse,
-#         "intent" : newIntent,
-#         "fallbackCount" : newFallbackCount,
-#         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
-#     }
-#     initial_bot_text = get_initial_state_or_text_module.get_initial_text()
-#     data["old_data"].append(initial_bot_text)
-#     for value in response.values():
-#         data["old_data"].append(value)
-#     new_history = data["old_data"]
-#     with open("NM_chat_history.json", 'w') as history:
-#         json.dump(new_history, history, indent=4)
-
-
-#     return jsonify(response)
+    with open("NM_chat_history.json", 'w') as history:
+        json.dump([initial_bot_text], history, indent=4)
+    socketio.emit("reset_success", {
+        "result" : "success"
+    })
 
 @app.route("/export", methods=["GET"])
 def export_history():
@@ -110,19 +80,6 @@ def export_history():
             "Content-Disposition": "attachment; filename=history_of_chat.json"
         }
     )
-
-@socketio.on("reset")
-def reset_history():
-
-    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
-
-    with open("NM_chat_history.json", 'w') as history:
-        json.dump([initial_bot_text], history, indent=4)
-    socketio.emit("reset_success", {
-        "result" : "success"
-    })
-
-
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

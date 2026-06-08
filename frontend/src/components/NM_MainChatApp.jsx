@@ -69,42 +69,7 @@ export function MainChatApp(){
 
     const old_data = chatArray
 
-    // async function addMessage(newMessage){
-        
-    //     const old_data = chatArray
 
-        
-    //     try {
-    //         const response = await fetch("http://127.0.0.1:5000/chat", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type" : "application/json"
-    //             },
-    //             body: JSON.stringify({message: newMessage,
-    //                 intent: intent,
-    //                 fallbackCount: fallbackCount,
-    //                 old_data: old_data})
-    //             })
-                
-    //         const data = await response.json()
-            
-    //         const newIntent = data["bot"]["intent"]
-    //         const newFallbackCount = data["bot"]["fallbackCount"]
-    //         setIntent(newIntent)
-    //         setFallbackCount(newFallbackCount)
-                                
-    //         function addMessages(prev){
-    //             return([...prev, data["user"], data["bot"]])
-    //         }
-    //         chatArrayUpdater(addMessages)    
-    //         changeText("")
-            
-           
-    //         } catch(error) {
-    //             console.log("Error caught is:" , error)
-    //         }
-            
-    // }
         const messagesBox = useRef(null)
         useEffect(()=>{
             const messagesBoxElement = messagesBox.current;
