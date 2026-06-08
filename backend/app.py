@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify, Response
+from flask import Flask, Response
 import NM_keyword_searcher as searcher
 from flask_cors import CORS
+import NM_bot_replay as NM_bot_replay
+import NM_fall_back as NM_fall_back
+import NM_history_handler as NM_history_handler
 from datetime import datetime
 import json
-import NM_initial_bot_state_and_text_getter as get_initial_state_or_text_module
 from flask_socketio import SocketIO, emit
 
 # Sorry by "intent" I meant state
@@ -26,12 +28,9 @@ def bot_response(data):
         "fallbackCount" : data["fallbackCount"],
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
-     
-    update = searcher.checkmsg(data)
-    botResponse = update[0]
-    newIntent = update[1]
-    newFallbackCount = update[2]
-
+    newIntent, more_info = searcher.checkmsg(data)    
+    newFallbackCount = NM_fall_back.check_fb_count(newIntent, data["intent"], data["fallbackCount"])
+    botResponse = NM_bot_replay.get_bot_reply(newIntent, newFallbackCount, more_info)
     response["bot"] = {
         "role" : "Bot",
         "message" : botResponse,
@@ -39,40 +38,20 @@ def bot_response(data):
         "fallbackCount" : newFallbackCount,
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
-    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
-    data["old_data"].append(initial_bot_text)
-    for value in response.values():
-        data["old_data"].append(value)
-    new_history = data["old_data"]
-    with open("NM_chat_history.json", 'w') as history:
-        json.dump(new_history, history, indent=4)
-
-
+    NM_history_handler.update_history(data["old_data"], response)
     emit("bot_reply", response)
 
 @socketio.on("reset")
 def reset_history():
-
-    initial_bot_text = get_initial_state_or_text_module.get_initial_text()
-
-    with open("NM_chat_history.json", 'w') as history:
-        json.dump([initial_bot_text], history, indent=4)
+    NM_history_handler.reset_history()
     socketio.emit("reset_success", {
         "result" : "success"
     })
 
 @app.route("/export", methods=["GET"])
 def export_history():
-    
-    try:
-        with open("NM_chat_history.json", 'r') as history:
-            history_obj = json.load(history)
-    except:
-        history_obj = []
-
-        
-    body = json.dumps(history_obj, indent=2)
-
+    history = NM_history_handler.export_history()
+    body = json.dumps(history, indent=2)
     return Response(
         body,
         mimetype="application/json",

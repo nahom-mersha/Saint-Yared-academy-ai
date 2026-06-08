@@ -18,3 +18,6 @@ def get_initial_text():
                 "timestamp" : datetime.now().strftime("%I:%M:%S %p")
             }
     return initial_bot_text
+
+def get_max_fallback_count():
+    return 3
