@@ -13,7 +13,7 @@ def reset_history():
     with open("NM_chat_history.json", 'w') as history:
         json.dump([initial_bot_text], history, indent=4)
 
-def export_history():
+def get_history():
     try:
         with open("NM_chat_history.json", 'r') as history_json:
             history = json.load(history_json)

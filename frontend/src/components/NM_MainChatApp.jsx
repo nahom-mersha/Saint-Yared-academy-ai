@@ -8,6 +8,21 @@ import Export_button from "./NM_export_button.jsx"
 import Reset_button from "./NM_reset_button.jsx";
 // Sorry by "intent" I meant state
 export function MainChatApp(){
+    const manager = useState([])
+    const chatArray = manager[0]
+    const chatArrayUpdater = manager[1]
+
+    const stateData = useState("")
+    const currentText = stateData[0]
+    const changeText = stateData[1]
+
+    const stateForIntent = useState("")
+    const intent = stateForIntent[0]
+    const setIntent = stateForIntent[1]
+
+    const stateForFallbackCount = useState(0)
+    const fallbackCount = stateForFallbackCount[0]
+    const setFallbackCount = stateForFallbackCount[1]
 
     useEffect(()=> {
         const bot_reply_handler = (data) =>  {
@@ -23,85 +38,56 @@ export function MainChatApp(){
             changeText("")
         };
         socketio.on("bot_reply", bot_reply_handler);
+        socketio.on("get_history", set_up_history)
+        socketio.emit("start_chat")
         return () => {
             socketio.off("bot_reply", bot_reply_handler)
+            socketio.off("get_history", set_up_history)
         };
     }, []);
-    
-
-
     function addMessage(newMessage){
         const body = {message: newMessage,
             intent: intent,
             fallbackCount: fallbackCount,
-            old_data: old_data}
-
+            old_data: chatArray}
         socketio.emit("user_text", body)       
     }
-    
-    //YOU SHOULD MAKE AN ENDPOINT FOR THIS INITIAL TEXT TO GET IT FROM THE BACKEND
-    const initial_text = {}
-    const time = new Date();
-    const now = time.toLocaleTimeString();
-    initial_text["bot"] = {
-        "role" : "Bot",
-        "message" : "Hi Please tell me your name!",
-        "intent" : "greet_and_ask_name",
-        "fallbackCount" : 0,
-        "timestamp" : now
+    function set_up_history(initial_data){
+        console.log(initial_data)
+        setIntent(initial_data.state)
+        chatArrayUpdater(initial_data.history)
+        setFallbackCount(initial_data.fall_back)
     }
+    const messagesBox = useRef(null);
+    useEffect(()=>{
+        const messagesBoxElement = messagesBox.current;
+        if (messagesBoxElement){
+            messagesBoxElement.scrollTop = messagesBoxElement.scrollHeight;
+        }}, [chatArray])
 
-    const manager = useState([initial_text["bot"]])
-    const chatArray = manager[0]
-    const chatArrayUpdater = manager[1]
+    return(
+        <div className="FullAppBox">
+            <div className="top_header">
+                <Export_button></Export_button>
+                <Reset_button chatArrayUpdater={chatArrayUpdater} 
+                                changeText={changeText} 
+                                setFallbackCount={setFallbackCount} 
+                                setIntent={setIntent}>
+                </Reset_button>
+            </div>
 
-    const stateData = useState("")
-    const currentText = stateData[0]
-    const changeText = stateData[1]
-
-    const stateForIntent = useState("greet_and_ask_name")
-    const intent = stateForIntent[0]
-    const setIntent = stateForIntent[1]
-
-    const stateForFallbackCount = useState(0)
-    const fallbackCount = stateForFallbackCount[0]
-    const setFallbackCount = stateForFallbackCount[1]
-
-    const old_data = chatArray
-
-
-        const messagesBox = useRef(null)
-        useEffect(()=>{
-            const messagesBoxElement = messagesBox.current;
-            if (messagesBoxElement){
-                messagesBoxElement.scrollTop = messagesBoxElement.scrollHeight;
-            }
-        }, [chatArray])
-
-    
-            return(
-            <div className="FullAppBox">
-                <div className="top_header">
-
-                    <Export_button></Export_button>
-
-                    <Reset_button chatArrayUpdater={chatArrayUpdater} 
-                                    changeText={changeText} 
-                                    setFallbackCount={setFallbackCount} 
-                                    setIntent={setIntent}>
-                    </Reset_button>
-
-                </div>
-                <div className="messagesBoxCSS" ref={messagesBox}>
-                    <ChatMessagesRenderer messages ={chatArray}>
-                    </ChatMessagesRenderer>
-                </div>
+            <div className="messagesBoxCSS" ref={messagesBox}>
+                <ChatMessagesRenderer messages ={chatArray}>
+                </ChatMessagesRenderer>
+            </div>
+            
+            <div>
                 <InputBar 
                     messageAdder={addMessage} 
                     currentText={currentText}
-                    changeText={changeText}
->
+                    changeText={changeText}>
                 </InputBar>
             </div>
+        </div>
     );
 }

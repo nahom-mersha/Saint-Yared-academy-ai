@@ -1,4 +1,4 @@
-import "../styles/chatText.css"
+import "../styles/NM_chatText.css"
 import "../styles/timestamp.css"
 import SendButton from "./NM_send_button.jsx";
 

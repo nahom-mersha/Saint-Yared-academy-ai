@@ -1,4 +1,4 @@
-import "../styles/NM_send_button.css"
+import "../styles/NM_buttons.css"
 
 function Export_button(){
     async function export_funct(){
@@ -6,9 +6,9 @@ function Export_button(){
     }
     
     return(
-        <div>
+        <>
             <button className="button" onClick={export_funct}>Export</button>
-        </div>
+        </>
     )
 }
 

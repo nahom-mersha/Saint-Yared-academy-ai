@@ -7,6 +7,8 @@ import NM_history_handler as NM_history_handler
 from datetime import datetime
 import json
 from flask_socketio import SocketIO, emit
+import NM_initial_chat_setup
+
 
 # Sorry by "intent" I meant state
 
@@ -17,6 +19,21 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 @app.route("/")
 def home():
     return "This is just the home page"
+
+@socketio.on("start_chat")
+def send_history():
+    history = NM_history_handler.get_history()
+    if len(history) > 0:
+        state = history[-1]["intent"]
+        fall_back = history[-1]["fallbackCount"]
+    else:
+        state = NM_initial_chat_setup.get_initial_state()
+        fall_back = 0
+    socketio.emit("get_history", {
+                "state" : state,
+                "history" : history,
+                "fall_back" : fall_back
+            })
 
 @socketio.on("user_text")
 def bot_response(data):
@@ -44,13 +61,13 @@ def bot_response(data):
 @socketio.on("reset")
 def reset_history():
     NM_history_handler.reset_history()
-    socketio.emit("reset_success", {
-        "result" : "success"
-    })
+    initial_bot_text = NM_initial_chat_setup.get_initial_text()
+
+    socketio.emit("reset_success", initial_bot_text)
 
 @app.route("/export", methods=["GET"])
 def export_history():
-    history = NM_history_handler.export_history()
+    history = NM_history_handler.get_history()
     body = json.dumps(history, indent=2)
     return Response(
         body,
