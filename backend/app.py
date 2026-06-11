@@ -1,5 +1,5 @@
 from flask import Flask, Response
-import NM_keyword_searcher as searcher
+import NM_intents_searcher as searcher
 from flask_cors import CORS
 import NM_bot_replay as NM_bot_replay
 import NM_fall_back as NM_fall_back
@@ -8,9 +8,7 @@ from datetime import datetime
 import json
 from flask_socketio import SocketIO, emit
 import NM_initial_chat_setup
-
-
-# Sorry by "intent" I meant state
+import NM_state_detector
 
 app = Flask(__name__)
 CORS(app)
@@ -24,7 +22,7 @@ def home():
 def send_history():
     history = NM_history_handler.get_history()
     if len(history) > 0:
-        state = history[-1]["intent"]
+        state = history[-1]["current_bot_state"]
         fall_back = history[-1]["fallbackCount"]
     else:
         state = NM_initial_chat_setup.get_initial_state()
@@ -41,17 +39,18 @@ def bot_response(data):
     response["user"] = {
         "role" : "User",
         "message" : data["message"],
-        "intent" : data["intent"],
+        "current_bot_state" : data["current_bot_state"],
         "fallbackCount" : data["fallbackCount"],
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
-    newIntent, more_info = searcher.checkmsg(data)    
-    newFallbackCount = NM_fall_back.check_fb_count(newIntent, data["intent"], data["fallbackCount"])
-    botResponse = NM_bot_replay.get_bot_reply(newIntent, newFallbackCount, more_info)
+    possible_intents = searcher.extract_possible_intents(data["message"])
+    state = NM_state_detector.get_state(possible_intents, data["fallbackCount"])
+    newFallbackCount = NM_fall_back.update_fb_count(state, data["fallbackCount"])
+    botResponse = NM_bot_replay.get_bot_reply(state, possible_intents, newFallbackCount)
     response["bot"] = {
         "role" : "Bot",
         "message" : botResponse,
-        "intent" : newIntent,
+        "current_bot_state" : state,
         "fallbackCount" : newFallbackCount,
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }

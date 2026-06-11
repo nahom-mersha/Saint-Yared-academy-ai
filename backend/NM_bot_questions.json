@@ -1,13 +1,13 @@
 {
-            "greet_and_ask_name" : "Hi Please tell me your name!",
+            "greet_user" : "Hi!!",
             
-            "list_options" :
-                {
-                    "question" : "Please choose from the following services. Do you want the St. Yared Academy's webiste link? or should I tell you about the academy? or should I list the contact info for the academy?",
-                    "for_about_academy" : "The St. Yared Academy of the Ethiopian Orthodox Tewahedo Church in Germany e.V., based in Hamburg, pursues exclusively and directly charitable purposes within the meaning of the section 'Tax-privileged purposes' of the Tax Code. His main tasks are scientific research and education on all topics of the Ethiopian Orthodox Tewahedo Church.",
-                    "for_link" : "The webiste link is: https://yared-academy.org/ .",
-                    "for_contact_list" : "The academy's contact phone number is +49 178 168 8351 and email is office@yared-academy.org."
-                },
+            "list_options" : "Please choose from the following services. Do you want the St. Yared Academy's webiste link? or should I tell you about the academy? or should I list the contact info for the academy? or should I list founding members?",
+            
+            "for_about_academy" : "The St. Yared Academy of the Ethiopian Orthodox Tewahedo Church in Germany e.V., based in Hamburg, pursues exclusively and directly charitable purposes within the meaning of the section 'Tax-privileged purposes' of the Tax Code. His main tasks are scientific research and education on all topics of the Ethiopian Orthodox Tewahedo Church.",
+            
+            "for_link" : "The webiste link is: https://yared-academy.org/ .",
+            
+            "for_contact_list" : "The academy's contact phone number is +49 178 168 8351 and email is office@yared-academy.org.",
             
             "ask_to_show_Founding_members" : " Now i can show you founding members. Please say yes",
             
@@ -15,7 +15,7 @@
 
             "end" : "Thank you. This chat has ended",
 
-            "soft_fallback" : "Please can you rephrase your response?",
+            "soft_fall_back" : "Please can you rephrase your response?",
 
             "hard_fallback_end" : "Opps, something went wrong. Please restart/reset the chat"
 

@@ -6,7 +6,7 @@ import "../styles/NM_full_app_box_and_message_box.css"
 import "../styles/NM_top_header.css"
 import Export_button from "./NM_export_button.jsx"
 import Reset_button from "./NM_reset_button.jsx";
-// Sorry by "intent" I meant state
+// Sorry by "state" I meant state
 export function MainChatApp(){
     const manager = useState([])
     const chatArray = manager[0]
@@ -16,9 +16,9 @@ export function MainChatApp(){
     const currentText = stateData[0]
     const changeText = stateData[1]
 
-    const stateForIntent = useState("")
-    const intent = stateForIntent[0]
-    const setIntent = stateForIntent[1]
+    const stateMemory = useState("")
+    const state = stateMemory[0]
+    const setState = stateMemory[1]
 
     const stateForFallbackCount = useState(0)
     const fallbackCount = stateForFallbackCount[0]
@@ -26,9 +26,9 @@ export function MainChatApp(){
 
     useEffect(()=> {
         const bot_reply_handler = (data) =>  {
-            const newIntent = data["bot"]["intent"]
+            const newState = data["bot"]["current_bot_state"]
             const newFallbackCount = data["bot"]["fallbackCount"]
-            setIntent(newIntent)
+            setState(newState)
             setFallbackCount(newFallbackCount)
                                 
             function addMessages(prev){
@@ -47,14 +47,14 @@ export function MainChatApp(){
     }, []);
     function addMessage(newMessage){
         const body = {message: newMessage,
-            intent: intent,
+            current_bot_state: state,
             fallbackCount: fallbackCount,
             old_data: chatArray}
         socketio.emit("user_text", body)       
     }
     function set_up_history(initial_data){
         console.log(initial_data)
-        setIntent(initial_data.state)
+        setState(initial_data.state)
         chatArrayUpdater(initial_data.history)
         setFallbackCount(initial_data.fall_back)
     }
@@ -72,7 +72,7 @@ export function MainChatApp(){
                 <Reset_button chatArrayUpdater={chatArrayUpdater} 
                                 changeText={changeText} 
                                 setFallbackCount={setFallbackCount} 
-                                setIntent={setIntent}>
+                                setState={setState}>
                 </Reset_button>
             </div>
 

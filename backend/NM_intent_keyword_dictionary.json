@@ -1,0 +1,39 @@
+{
+        "greeting" : [
+                        "hi",
+                        "hello"
+            ],
+        "get_service_options" : [ 
+                                    "service",
+                                    "options"            
+            ],
+        "get_general_academy_info" : [
+                                    "about", 
+                                    "info",
+                                    "information",
+                                    "tell",
+                                    "Explain"
+                            ],
+        "get_academy_website_link" : [
+                                    "link",
+                                    "website",
+                                    "webpage"
+                            ],
+        "get_academy_contact_options" : [
+                                    "contact",
+                                    "phone",
+                                    "number",
+                                    "email",
+                                    "gmail"
+                            ],
+        "get_academy_founding_members_list" : [
+                                    "founding", 
+                                    "members"
+                                ],
+        "ending_the_conversation" : [
+                                    "by",
+                                    "bye",
+                                    "chaw"
+                                ],
+        "no_keyword_match" : []
+}

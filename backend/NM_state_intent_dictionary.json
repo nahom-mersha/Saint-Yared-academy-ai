@@ -1,0 +1,21 @@
+{
+            "greeting" : "greet_user",
+
+            "get_service_options" : "list_options",
+            
+            "get_general_academy_info" : "for_about_academy",
+
+            "get_academy_website_link" : "for_link",
+
+            "get_academy_contact_options" : "for_contact_list",
+            
+            "get_academy_founding_members_list" : "ask_to_show_Founding_members",
+
+            "ending_the_conversation" : "end",
+
+            "multiple_intents" : "list_and_clarify_intent",
+            
+            "no_keyword_match" : "soft_fall_back",
+            
+            "max_fall_back" : "hard_fallback_end"
+}

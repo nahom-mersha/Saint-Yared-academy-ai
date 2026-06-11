@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 def get_initial_state():
-    INITIAL_STATE = "greet_and_ask_name"
+    INITIAL_STATE = "greet_user"
     return INITIAL_STATE
 
 def get_initial_text():
@@ -13,7 +13,7 @@ def get_initial_text():
         initial_bot_text = {
                 "role" : "Bot",
                 "message" : q_data[initial_state],
-                "intent" : initial_state,
+                "current_bot_state" : initial_state,
                 "fallbackCount" : 0,
                 "timestamp" : datetime.now().strftime("%I:%M:%S %p")
             }

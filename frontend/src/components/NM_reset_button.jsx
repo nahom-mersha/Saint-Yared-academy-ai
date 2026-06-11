@@ -6,13 +6,13 @@ function Reset_button(props){
     const chatArrayUpdater = props.chatArrayUpdater
     const changeText = props.changeText
     const setFallbackCount = props.setFallbackCount
-    const setIntent = props.setIntent
+    const setState = props.setState
     
     useEffect( () => {
         const reset_handler = (initial) => {
             chatArrayUpdater([initial])
                 setFallbackCount(0)
-                setIntent("greet_and_ask_name")
+                setState("greet_user")
                 changeText("")
         }
         socketio.on("reset_success", reset_handler);

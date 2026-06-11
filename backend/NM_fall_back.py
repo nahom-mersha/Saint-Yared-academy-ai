@@ -1,11 +1,7 @@
-import NM_initial_chat_setup
-
-def check_fb_count(newIntent, pastIntent, current_fb):
-    max_fallback_count = NM_initial_chat_setup.get_max_fallback_count()
-    if current_fb >= max_fallback_count:
-        return current_fb
-    if newIntent == pastIntent:
-        current_fb += 1
-        return current_fb
-    return 0
+def update_fb_count(newState, fall_back):
+    if newState == "soft_fall_back" or newState == "hard_fallback_end":
+        new_fall_back = fall_back + 1
+        return new_fall_back
+    else:
+        return 0
     
