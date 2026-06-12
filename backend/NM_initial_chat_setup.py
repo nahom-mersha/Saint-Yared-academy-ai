@@ -12,7 +12,7 @@ def get_initial_text():
         q_data = json.load(f)
         initial_bot_text = {
                 "role" : "Bot",
-                "message" : q_data[initial_state],
+                "message" : q_data[initial_state] + q_data["list_options"],
                 "current_bot_state" : initial_state,
                 "fallbackCount" : 0,
                 "timestamp" : datetime.now().strftime("%I:%M:%S %p")

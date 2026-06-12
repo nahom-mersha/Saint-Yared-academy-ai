@@ -35,5 +35,13 @@
                                     "bye",
                                     "chaw"
                                 ],
+        "accept_proposal" : [
+                "yes",
+                "ya"
+        ],
+        "decline_proposal" : [
+                "no",
+                "na"
+        ],
         "no_keyword_match" : []
 }

@@ -1,7 +1,7 @@
 {
             "greet_user" : "Hi!!",
             
-            "list_options" : "Please choose from the following services. Do you want the St. Yared Academy's webiste link? or should I tell you about the academy? or should I list the contact info for the academy? or should I list founding members?",
+            "list_options" : "\nThe available services you can choose from:\n\n1. Academy information\n2. Website link\n3. Contact details\n4. Founding members\n\nPlease type one of these options to continue.",
             
             "for_about_academy" : "The St. Yared Academy of the Ethiopian Orthodox Tewahedo Church in Germany e.V., based in Hamburg, pursues exclusively and directly charitable purposes within the meaning of the section 'Tax-privileged purposes' of the Tax Code. His main tasks are scientific research and education on all topics of the Ethiopian Orthodox Tewahedo Church.",
             
@@ -16,7 +16,8 @@
             "end" : "Thank you. This chat has ended",
 
             "soft_fall_back" : "Please can you rephrase your response?",
-
-            "hard_fallback_end" : "Opps, something went wrong. Please restart/reset the chat"
-
+            
+            "hard_fallback_end" : "Opps, something went wrong. Please restart/reset the chat",
+            
+            "no_next_state" : "Opps, there is nothing to accept!"
 }
