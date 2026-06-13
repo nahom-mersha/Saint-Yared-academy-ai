@@ -1,47 +1,19 @@
 {
-        "greeting" : [
-                        "hi",
-                        "hello"
-            ],
-        "get_service_options" : [ 
-                                    "service",
-                                    "options"            
-            ],
-        "get_general_academy_info" : [
-                                    "about", 
-                                    "info",
-                                    "information",
-                                    "tell",
-                                    "Explain"
-                            ],
-        "get_academy_website_link" : [
-                                    "link",
-                                    "website",
-                                    "webpage"
-                            ],
-        "get_academy_contact_options" : [
-                                    "contact",
-                                    "phone",
-                                    "number",
-                                    "email",
-                                    "gmail"
-                            ],
-        "get_academy_founding_members_list" : [
-                                    "founding", 
-                                    "members"
-                                ],
-        "ending_the_conversation" : [
-                                    "by",
-                                    "bye",
-                                    "chaw"
-                                ],
-        "accept_proposal" : [
-                "yes",
-                "ya"
-        ],
-        "decline_proposal" : [
-                "no",
-                "na"
-        ],
-        "no_keyword_match" : []
+  "positive_accept_confirm": [
+    "yes",
+    "yeah",
+    "yep"
+  ],
+
+  "negative_decline_not_confirm": [
+    "no",
+    "nope",
+    "nah"
+  ],
+
+  "estimate_elevation_level": [
+    "high",
+    "medium",
+    "low"
+  ]
 }

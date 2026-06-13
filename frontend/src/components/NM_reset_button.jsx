@@ -12,7 +12,7 @@ function Reset_button(props){
         const reset_handler = (initial) => {
             chatArrayUpdater([initial])
                 setFallbackCount(0)
-                setState("greet_user")
+                setState("greet_and_ask_name")
                 changeText("")
         }
         socketio.on("reset_success", reset_handler);

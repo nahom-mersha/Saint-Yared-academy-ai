@@ -44,9 +44,9 @@ def bot_response(data):
         "timestamp" : datetime.now().strftime("%I:%M:%S %p")
     }
     possible_intents = searcher.extract_possible_intents(data["message"])
-    state = NM_state_detector.get_state(possible_intents, data["fallbackCount"], data["current_bot_state"])
+    state = NM_state_detector.get_state(possible_intents, data["fallbackCount"], data["current_bot_state"], data["old_data"])
     newFallbackCount = NM_fall_back.update_fb_count(state, data["fallbackCount"])
-    botResponse = NM_bot_replay.get_bot_reply(state, possible_intents, newFallbackCount)
+    botResponse = NM_bot_replay.get_bot_reply(state)
     response["bot"] = {
         "role" : "Bot",
         "message" : botResponse,

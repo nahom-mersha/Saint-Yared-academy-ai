@@ -20,3 +20,14 @@ def get_history():
     except:
         history = []
     return history
+
+def get_last_possible_state():
+    try:
+        with open("NM_chat_history.json", 'r') as history_json:
+            history = json.load(history_json)
+    except:
+        history = []
+    
+    for chat in reversed(history):
+        if chat["current_bot_state"] != "soft_fall_back":
+            return chat["current_bot_state"]

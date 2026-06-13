@@ -1,23 +1,19 @@
 {
-            "greet_user" : "Hi!!",
-            
-            "list_options" : "\nThe available services you can choose from:\n\n1. Academy information\n2. Website link\n3. Contact details\n4. Founding members\n\nPlease type one of these options to continue.",
-            
-            "for_about_academy" : "The St. Yared Academy of the Ethiopian Orthodox Tewahedo Church in Germany e.V., based in Hamburg, pursues exclusively and directly charitable purposes within the meaning of the section 'Tax-privileged purposes' of the Tax Code. His main tasks are scientific research and education on all topics of the Ethiopian Orthodox Tewahedo Church.",
-            
-            "for_link" : "The webiste link is: https://yared-academy.org/ .",
-            
-            "for_contact_list" : "The academy's contact phone number is +49 178 168 8351 and email is office@yared-academy.org.",
-            
-            "ask_to_show_Founding_members" : " Now i can show you founding members. Please say yes",
-            
-            "ask_satisfaction" : "The founding members are: Prof. Dr. Mersha Mengistie Chairman, Prince Dr. Asfa-Wossen Asserate Founding Members, Zemelak Demissie Vice-Chairman and Taddesse Seifu Secretary. Thank you for using this bot, are you satisfied? Please give any feedback to the developer.",
+  "greet_and_ask_name": "Hi! What is your name?",
 
-            "end" : "Thank you. This chat has ended",
+  "ask_about_academy_knowledge": "Nice to meet you! Have you heard about Saint Yared Academy before?",
 
-            "soft_fall_back" : "Please can you rephrase your response?",
-            
-            "hard_fallback_end" : "Opps, something went wrong. Please restart/reset the chat",
-            
-            "no_next_state" : "Opps, there is nothing to accept!"
+  "give_academy_info_ask_visited_lalibela": "Saint Yared Academy is a non-profit organization based in Hamburg, Germany. It focuses on research and education about the Ethiopian Orthodox Tewahedo Church. Have you ever visited Lalibela?",
+
+  "give_lalibela_info_ask_elevation_estimate": "Lalibela is famous for its rock-hewn churches and is a UNESCO World Heritage Site. How high above sea level do you think it is: low, medium, or high?",
+
+  "give_elevation_info_ask_website_access": "Lalibela is situated at an elevation of approximately 2,500–2,600 meters above sea level, which is considered quite high. Would you like to see the website of the Saint Yared Academy?",
+
+  "give_link_and_end": "Here is the website: https://yared-academy.org/. Thank you for chatting!",
+
+  "end": "Sorry, this chat has ended.",
+
+  "soft_fall_back": "Sorry, I didn't understand that. Could you rephrase it?",
+
+  "hard_fallback_end": "Oops, something went wrong. Please restart the chat."
 }

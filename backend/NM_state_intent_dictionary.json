@@ -1,21 +1,30 @@
 {
-            "greeting" : "greet_user",
+  "greet_and_ask_name": {
+    "possible_intents": ["ANY"],
+    "next": "ask_about_academy_knowledge"
+  },
 
-            "get_service_options" : "list_options",
-            
-            "get_general_academy_info" : "for_about_academy",
+  "ask_about_academy_knowledge": {
+    "possible_intents": ["positive_accept_confirm", "negative_decline_not_confirm"],
+    "next": "give_academy_info_ask_visited_lalibela"
+  },
 
-            "get_academy_website_link" : "for_link",
+  "give_academy_info_ask_visited_lalibela": {
+    "possible_intents": ["positive_accept_confirm", "negative_decline_not_confirm"],
+    "next": "give_lalibela_info_ask_elevation_estimate"
+  },
 
-            "get_academy_contact_options" : "for_contact_list",
-            
-            "get_academy_founding_members_list" : "ask_to_show_Founding_members",
+  "give_lalibela_info_ask_elevation_estimate": {
+    "possible_intents": ["estimate_elevation_level"],
+    "next": "give_elevation_info_ask_website_access"
+  },
 
-            "ending_the_conversation" : "end",
-
-            "multiple_intents" : "list_and_clarify_intent",
-            
-            "no_keyword_match" : "soft_fall_back",
-            
-            "max_fall_back" : "hard_fallback_end"
+  "give_elevation_info_ask_website_access": {
+    "possible_intents": ["positive_accept_confirm", "negative_decline_not_confirm"],
+    "next": "give_link_and_end"
+  },
+  "end" : {
+    "possible_intents" : ["ANY"],
+    "next" : "end"
+  }
 }
