@@ -9,14 +9,15 @@ import json
 from flask_socketio import SocketIO, emit
 import NM_initial_chat_setup
 import NM_state_detector
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route("/")
 def home():
-    return "This is just the home page"
+    return app.send_static_file("index.html")
 
 @socketio.on("start_chat")
 def send_history():
@@ -77,4 +78,9 @@ def export_history():
     )
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(
+        app,
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False,
+    )

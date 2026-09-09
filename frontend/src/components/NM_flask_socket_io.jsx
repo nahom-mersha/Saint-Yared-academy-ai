@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
-const socketio = io("http://localhost:5000/");
+const socketio = io();
 
 export default socketio
