@@ -4,6 +4,8 @@ A real-time conversational web application that introduces users to Saint Yared 
 
 The project combines a React interface with a Flask-SocketIO backend. It uses rule-based intent detection and conversation-state management to interpret responses and determine the next dialogue step.
 
+The application is also deployed and publicly accessible on Microsoft Azure.
+
 ## Live Demo
 
 [Open the live application](https://saint-yared-chatbot-nahom-2026-eedrg9efawbxd7ae.italynorth-01.azurewebsites.net/)
