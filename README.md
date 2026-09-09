@@ -4,6 +4,10 @@ A real-time conversational web application that introduces users to Saint Yared 
 
 The project combines a React interface with a Flask-SocketIO backend. It uses rule-based intent detection and conversation-state management to interpret responses and determine the next dialogue step.
 
+## Live Demo
+
+[Open the live application](https://saint-yared-chatbot-nahom-2026-eedrg9efawbxd7ae.italynorth-01.azurewebsites.net/)
+
 ## Features
 
 - Real-time communication with Socket.IO
@@ -74,7 +78,6 @@ If the input is not understood, the assistant first asks the user to rephrase it
 - Intent detection is rule-based rather than machine-learning-based.
 - The application is designed as a local, single-user demonstration.
 - Chat history is stored in a shared JSON file.
-- The backend URL is currently configured for local development.
 
 ## Author
 
