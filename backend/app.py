@@ -26,6 +26,8 @@ def send_history():
         state = history[-1]["current_bot_state"]
         fall_back = history[-1]["fallbackCount"]
     else:
+        initial_message = NM_initial_chat_setup.get_initial_text()
+        history = [initial_message]
         state = NM_initial_chat_setup.get_initial_state()
         fall_back = 0
     socketio.emit("get_history", {
